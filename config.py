@@ -30,6 +30,7 @@ class define:
                  ^---'
 
     [*] Author:dacAIniao@重明安全
+    [*] Web:chmsec.com
     '''
     usage = '''
     Usage: 
