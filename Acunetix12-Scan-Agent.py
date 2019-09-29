@@ -105,8 +105,8 @@ def add(url):
         return
 
 
-def single_scan(url):
-    data = {'target_id':add(url),'profile_id':define.awvs_scan_rule['full'],
+def single_scan(url,rule='full'):
+    data = {'target_id':add(url),'profile_id':define.awvs_scan_rule[rule],
         'schedule':{'disable':False,'start_date':None, 'time_sensitive':False}}
     try:
         r = requests.post(url=define.host + 'api/v1/scans', timeout=10, verify=False, headers=define.api_header, data=json.dumps(data))
@@ -134,16 +134,25 @@ if __name__ == '__main__':
         print(define.ORANGE+define.usage)
     elif sys.argv[1] == '-f':
         try:
-            task(str(sys.argv[2]))
-            print(define.RED+"[*]扫描开始添加")
-            for s in x:
-                single_scan(s)
-            print(define.RED+"[*]扫描添加完毕")
+            if len(sys.argv) > 2:
+                rule = sys.argv[3]
+                task(str(sys.argv[2]))
+                print(define.RED+"[*]扫描开始添加")
+                for s in x:
+                    single_scan(s,rule)
+                print(define.RED+"[*]扫描添加完毕")
+            if len(sys.argv) = 2:
+                task(str(sys.argv[2]))
+                print(define.RED+"[*]扫描开始添加")
+                for s in x:
+                    single_scan(s)
+                print(define.RED+"[*]扫描添加完毕")
         except:
             print(define.BLUE+'    [*]Usage example: Python3 Acunetix12-Scan-Agent.py -f url.txt')
     elif sys.argv[1] == '-d':
         delete_all()
     elif sys.argv[1] == '-o':
         get_scans()
+
     else:
         print(define.ORANGE+define.usage)
