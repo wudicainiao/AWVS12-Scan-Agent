@@ -141,7 +141,7 @@ if __name__ == '__main__':
                 for s in x:
                     single_scan(s,rule)
                 print(define.RED+"[*]扫描添加完毕")
-            if len(sys.argv) = 2:
+            if len(sys.argv) == 2:
                 task(str(sys.argv[2]))
                 print(define.RED+"[*]扫描开始添加")
                 for s in x:
