@@ -86,7 +86,8 @@ def creat_xlsx():
 x=[]
 
 def task(files):
-    s = open('%s'%files,'r')
+    print("读取%s文件 "%files)
+    s = open('%s'%files,'r',encoding="utf-8")
     for i in s.readlines():
         i = i.strip()
         x.append(i)
@@ -133,22 +134,28 @@ if __name__ == '__main__':
     if len(sys.argv) < 2:
         print(define.ORANGE+define.usage)
     elif sys.argv[1] == '-f':
+        # print(len(sys.argv))
         try:
-            if len(sys.argv) > 2:
+            if len(sys.argv) == 4:
+                # print("JC2")
                 rule = sys.argv[3]
+                # print("JC1")
                 task(str(sys.argv[2]))
+                print("JC")
+                print("配置为使用%s模式进行扫描："%rule)
                 print(define.RED+"[*]扫描开始添加")
                 for s in x:
                     single_scan(s,rule)
                 print(define.RED+"[*]扫描添加完毕")
-            if len(sys.argv) == 2:
+            if len(sys.argv) == 3:
                 task(str(sys.argv[2]))
+                print("配置为使用full模式进行扫描：")
                 print(define.RED+"[*]扫描开始添加")
                 for s in x:
                     single_scan(s)
                 print(define.RED+"[*]扫描添加完毕")
         except:
-            print(define.BLUE+'    [*]Usage example: Python3 Acunetix12-Scan-Agent.py -f url.txt')
+            print(define.BLUE+'    [*]Usage example: Python3 Acunetix12-Scan-Agent.py -f url.txt full')
     elif sys.argv[1] == '-d':
         delete_all()
     elif sys.argv[1] == '-o':
